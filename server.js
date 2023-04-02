@@ -6,7 +6,7 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 
 
-//const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 dotenv.config();
 
 const app = express();
@@ -46,7 +46,7 @@ mongoose
 */
 //const PORT = process.env.PORT || 5000;
 
-//app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 app.get("/h", (req, res) => {
   res.send("Successful response.");
 });
