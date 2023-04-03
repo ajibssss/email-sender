@@ -26,7 +26,7 @@ router.post(`/blogs`, async (req, res) => {
     blog.second = req.body.second;
     blog.minute = req.body.minute;
     blog.hour = req.body.hour;
-    blog.day = req.file.day;
+    blog.day = req.body.day;
     blog.week = req.body.week;
     bolg.html = req.body.html
     await blog.save();
