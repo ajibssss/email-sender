@@ -24,14 +24,14 @@ app.use("/api", blogsRoutes);
 
 
 //connect to mongodb
-/*
+
 mongoose
   .connect( process.env.CONNECTION_STRING)
   .then(() => {
     console.log(`Listening on ${ PORT }`);
   })
   .catch(err => console.log(err));
-
+/*
 
 mongoose
   .connect(process.env.DATABASE, {
