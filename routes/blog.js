@@ -8,13 +8,7 @@ const emitter = new EventEmitter()
 emitter.setMaxListeners(0)
 const event = new EventEmitter();
 const router = express.Router();
-let mailTransporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.GOOGLE_APP_EMAIL,
-    pass: process.env.GOOGLE_APP_PW
-  }
-});
+
 router.post(`/blogs`, async (req, res) => {
   try {
     let blog = new Blog();
@@ -34,7 +28,7 @@ router.post(`/blogs`, async (req, res) => {
     res.json({
       status: true,
       message: "sent",
-      });
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -53,7 +47,13 @@ router.post(`/blogs`, async (req, res) => {
     html: `${req.body.html} `
   };
   console.log(data.minute, data.hour, data.day, data.month, data.week)
-
+  let mailTransporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.GOOGLE_APP_EMAIL,
+      pass: process.env.GOOGLE_APP_PW
+    }
+  });
   const task = cronJob.schedule(`*/${data.minute} ${data.hour} ${data.day} ${data.month} ${data.week}    `, () => {
     mailTransporter.sendMail(data, err => {
       if (err) {
