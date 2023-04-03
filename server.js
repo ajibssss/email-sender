@@ -5,7 +5,11 @@ const cors = require("cors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 
-
+const corsOptions ={
+  origin:'http://localhost:8080',
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200
+}
 const PORT = process.env.PORT || 3000;
 dotenv.config();
 
@@ -15,7 +19,7 @@ const blogsRoutes = require("./routes/blog");
 
 app.use(morgan("combined"));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use("/api", blogsRoutes);
 
 
