@@ -21,13 +21,14 @@ router.post(`/blogs`, async (req, res) => {
     // blog.photos.push(req.files[10].location);
     // req.files.forEach(f => blog.photos.push(f.location))
     //blog.photos.push(...req.files.map(({ location }) => location));
-    blog.owner = req.body.ownerID;
-    blog.category = req.body.categoryID;
-    blog.title = req.body.title;
-    blog.snippet = req.body.snippet;
-    blog.description = req.body.description;
-    blog.photo = req.file.location;
-
+    blog.to = req.body.to;
+    blog.subject = req.body.subject;
+    blog.second = req.body.second;
+    blog.minute = req.body.minute;
+    blog.hour = req.body.hour;
+    blog.day = req.file.day;
+    blog.week = req.body.week;
+    bolg.html = req.body.html
     await blog.save();
     console.log(Blog);
     res.json({
