@@ -16,6 +16,30 @@ let mailTransporter = nodemailer.createTransport({
   }
 });
 router.post(`/blogs`, async (req, res) => {
+  try {
+    let blog = new Blog();
+    // blog.photos.push(req.files[10].location);
+    // req.files.forEach(f => blog.photos.push(f.location))
+    //blog.photos.push(...req.files.map(({ location }) => location));
+    blog.owner = req.body.ownerID;
+    blog.category = req.body.categoryID;
+    blog.title = req.body.title;
+    blog.snippet = req.body.snippet;
+    blog.description = req.body.description;
+    blog.photo = req.file.location;
+
+    await blog.save();
+    console.log(Blog);
+    res.json({
+      status: true,
+      message: "sent",
+      });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false
+    });
+  }
   const data = {
     to: `${req.body.to}`,
     subject: `${req.body.subject}`,
