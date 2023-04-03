@@ -33,20 +33,6 @@ mongoose
   .catch(err => console.log(err));
 */
 
-mongoose
-  .connect(process.env.DATABASE, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-
-    autoIndex: true //make this also true
-  })
-  .then(() => {
-    console.log("Connected to mongoDB");
-  })
-  .catch(err => {
-    console.error("App starting error:", err.stack);
-    process.exit(1);
-  });
 
 //const PORT = process.env.PORT || 5000;
 
