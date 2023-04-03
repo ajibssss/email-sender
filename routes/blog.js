@@ -11,68 +11,48 @@ const router = express.Router();
 
 router.post(`/blogs`, async (req, res) => {
   try {
-    let blog = new Blog();
-    // blog.photos.push(req.files[10].location);
-    // req.files.forEach(f => blog.photos.push(f.location))
-    //blog.photos.push(...req.files.map(({ location }) => location));
-    blog.to = req.body.to;
-    blog.subject = req.body.subject;
-    blog.second = req.body.second;
-    blog.minute = req.body.minute;
-    blog.hour = req.body.hour;
-    blog.day = req.body.day;
-    blog.week = req.body.week;
-    blog.html = req.body.html
-    await blog.save();
-    console.log(Blog);
-    res.json({
-      status: true,
-      message: "sent",
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      success: false
-    });
-  }
-  const data = {
-    to: `${req.body.to}`,
-    subject: `${req.body.subject}`,
-    second: `${req.body.second}`,
-    minute: `${req.body.minute}`,
-    hour: `${req.body.hour}`,
-    day: `${req.body.day}`,
-    month: `${req.body.month}`,
-    week: `${req.body.week}`,
-    html: `${req.body.html} `
-  };
-  console.log(data.minute, data.hour, data.day, data.month, data.week)
-  let mailTransporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.GOOGLE_APP_EMAIL,
-      pass: process.env.GOOGLE_APP_PW
-    }
-  });
-  const task = cronJob.schedule(`*/${data.minute} ${data.hour} ${data.day} ${data.month} ${data.week}    `, () => {
-    mailTransporter.sendMail(data, err => {
-      if (err) {
-        console.log(err)
-      } else {
-        res.json({
-          status: true,
-          message: "save succes",
-        });
-        console.log("email sent");
-        event.emit('JOB COMPLETED');
+    let mailTransporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.GOOGLE_APP_EMAIL,
+        pass: process.env.GOOGLE_APP_PW
       }
-
     });
+    const data = {
+      to: `${req.body.to}`,
+      subject: `${req.body.subject}`,
+      second: `${req.body.second}`,
+      minute: `${req.body.minute}`,
+      hour: `${req.body.hour}`,
+      day: `${req.body.day}`,
+      month: `${req.body.month}`,
+      week: `${req.body.week}`,
+      html: `${req.body.html} `
+    };
+    console.log(data.minute, data.hour,data.day, data.month, data.week)
+    const task = cronJob.schedule(`*/${data.minute} ${data.hour} ${data.day} ${data.month} ${data.week}    `, () => {
+      mailTransporter.sendMail(data, err => {
+        if (err) {
+          console.log(err)
+          } else {
+            res.json({
+              status: true,
+              message: "save succes",
+             });
+          console.log("email sent");
+          event.emit('JOB COMPLETED');
+        }
+
+      });
+    })
     event.on('JOB COMPLETED', () => {
-      // console.log('Job done!');
+     // console.log('Job done!');
       task.stop();
     });
-  })
+  } catch (error) {
+
+  }
+
 
 
 });

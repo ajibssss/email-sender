@@ -24,14 +24,14 @@ app.use("/api", blogsRoutes);
 
 
 //connect to mongodb
-
+/*
 mongoose
   .connect( process.env.CONNECTION_STRING)
   .then(() => {
     console.log(`Listening on ${ PORT }`);
   })
   .catch(err => console.log(err));
-/*
+*/
 
 mongoose
   .connect(process.env.DATABASE, {
@@ -47,7 +47,7 @@ mongoose
     console.error("App starting error:", err.stack);
     process.exit(1);
   });
-*/
+
 //const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
