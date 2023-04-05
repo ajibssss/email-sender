@@ -14,7 +14,6 @@ router.post("/upload", function (req, res) {
     try {
 
       const data = {
-        form:req.body.from,
         to: req.body.to,
         subject: req.body.subject,
         html: req.body.html,
