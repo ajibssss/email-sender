@@ -2,7 +2,6 @@ const Blog = require("../models/blog");
 const express = require("express");
 const cronJob = require('node-cron');
 const nodemailer = require('nodemailer');
-
 const EventEmitter = require('events');
 const emitter = new EventEmitter()
 emitter.setMaxListeners(0)

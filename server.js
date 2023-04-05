@@ -6,7 +6,7 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 
 const corsOptions ={
-  origin:'http://localhost:8080',
+  origin:'https://contact-2aca9.web.app',
   credentials:true,            //access-control-allow-credentials:true
   optionSuccessStatus:200
 }
