@@ -16,11 +16,13 @@ dotenv.config();
 const app = express();
 const router = express.Router();
 const blogsRoutes = require("./routes/blog");
+const cronsRoutes = require("./routes/cron");
 
 app.use(morgan("combined"));
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 app.use("/api", blogsRoutes);
+app.use("/api", cronsRoutes);
 
 
 //connect to mongodb
