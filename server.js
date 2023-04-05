@@ -5,11 +5,6 @@ const cors = require("cors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 
-const corsOptions ={
-  origin:'https://contact-2aca9.web.app',
-  credentials:true,            //access-control-allow-credentials:true
-  optionSuccessStatus:200
-}
 const PORT = process.env.PORT || 3000;
 dotenv.config();
 
@@ -20,7 +15,7 @@ const cronsRoutes = require("./routes/cron");
 
 app.use(morgan("combined"));
 app.use(bodyParser.json());
-app.use(cors(corsOptions));
+app.use(cors());
 app.use("/api", blogsRoutes);
 app.use("/api", cronsRoutes);
 
